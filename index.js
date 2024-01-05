@@ -72,6 +72,8 @@ app.get("/posts", PostController.getAll);
 app.get("/prostitues", PostController.getProstitues);
 app.get("/masseuses", PostController.getMasseuses);
 app.get("/posts/:id", PostController.getOne);
+app.get("/posts/myposts/:id", PostController.getMyPosts);
+
 app.post(
   "/posts",
   checkAuth,
@@ -358,7 +360,7 @@ app.post('/uploadVerificationPhoto', upload2.single('image'), async (req, res) =
 
 
 
-app.listen(process.env.PORT || 4444, (err) => {
+app.listen( 4444, (err) => {
   if (err) return console.log(err);
 
   console.log("Server ok");

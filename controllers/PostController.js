@@ -37,9 +37,9 @@ export const create = async (req, res) => {
 
 export const getAll = async (req, res) => {
     try {
-        const posts = await PostModel.find().populate('user').exec()
-
-        res.json(posts)
+        const posts = await PostModel.find().exec()
+        const response = await posts.reverse()
+        res.json(response)
     } catch (e) {
         console.log(e)
         res.status(500).json({
@@ -51,7 +51,7 @@ export const getAll = async (req, res) => {
 export const getOne = async (req, res) => {
     try {
         const postId = req.params.id
-        const doc = await PostModel.findByIdAndUpdate(postId, { $inc: { viewsCount: 1 } })
+        const doc = await PostModel.findByIdAndUpdate(postId, { $inc: { viewsCount: 1 } }).populate()
         if (!doc) {
             return res.status(404).json({
                 message: 'Не удалось найти статью',
@@ -146,4 +146,16 @@ export const getMasseuses = async (req, res) => {
     }
 }
 
+
+export const getMyPosts = async (req, res) => {
+    try {
+        const userId = req.params.id
+        console.log(userId)
+        const myPosts = await PostModel.find({user:userId})
+        // console.log(myPosts)
+        res.json(myPosts)
+    } catch (err) {
+        res.json({message:err.message})
+    }
+}
 
