@@ -18,8 +18,8 @@ import uniqid from 'uniqid';
 
 mongoose
   .connect(
-    // process.env.MONGO_DB
-    "mongodb+srv://admin:wwwwww@cluster0.uxnwna5.mongodb.net/blog?retryWrites=true&w=majority"
+    process.env.MONGODB_URI
+    // "mongodb+srv://admin:wwwwww@cluster0.uxnwna5.mongodb.net/blog?retryWrites=true&w=majority"
 // 'mongodb://admin:wwwwww@host:127.0.0.1/test3?options...';
   )
   .then(() => console.log("Db ok"))
