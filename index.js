@@ -18,8 +18,8 @@ import uniqid from 'uniqid';
 
 mongoose
   .connect(
-    process.env.MONGODB_URI
-    // "mongodb+srv://admin:wwwwww@cluster0.uxnwna5.mongodb.net/blog?retryWrites=true&w=majority"
+    // process.env.MONGODB_URI
+    "mongodb+srv://admin:wwwwww@cluster0.uxnwna5.mongodb.net/blog?retryWrites=true&w=majority"
 // 'mongodb://admin:wwwwww@host:127.0.0.1/test3?options...';
   )
   .then(() => console.log("Db ok"))
@@ -360,7 +360,7 @@ app.post('/uploadVerificationPhoto', upload2.single('image'), async (req, res) =
 
 
 
-app.listen( 4444, (err) => {
+app.listen( process.env.PORT || 4444, (err) => {
   if (err) return console.log(err);
 
   console.log("Server ok");
