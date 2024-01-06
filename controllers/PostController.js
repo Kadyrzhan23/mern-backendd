@@ -120,9 +120,9 @@ export const getProstitues = async (req, res) => {
     try {
         const posts = await PostModel.find({category:'проститутка'})
 
-        res.status(200).json({
+        res.status(200).json(
             posts
-        })
+        )
         
     } catch (error) {
         res.status(500).json({
@@ -135,9 +135,9 @@ export const getMasseuses = async (req, res) => {
     try {
         const posts = await PostModel.find({category:'массажистка'})
 
-        res.status(200).json({
+        res.status(200).json(
             posts
-        })
+        )
         
     } catch (error) {
         res.status(500).json({
