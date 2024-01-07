@@ -18,8 +18,8 @@ import uniqid from 'uniqid';
 
 mongoose
   .connect(
-    // process.env.MONGODB_URI
-    "mongodb+srv://admin:wwwwww@cluster0.uxnwna5.mongodb.net/blog?retryWrites=true&w=majority"
+    process.env.MONGODB_URI
+    // "mongodb+srv://admin:wwwwww@cluster0.uxnwna5.mongodb.net/blog?retryWrites=true&w=majority"
 // 'mongodb://admin:wwwwww@host:127.0.0.1/test3?options...';
   )
   .then(() => console.log("Db ok"))
@@ -73,6 +73,8 @@ app.get("/prostitues", PostController.getProstitues);
 app.get("/masseuses", PostController.getMasseuses);
 app.get("/posts/:id", PostController.getOne);
 app.get("/posts/myposts/:id", PostController.getMyPosts);
+app.post("/favorites", PostController.getFavorites);
+
 
 app.post(
   "/posts",

@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb"
 import PostModel from "../models/Post.js"
 
 
@@ -159,3 +160,17 @@ export const getMyPosts = async (req, res) => {
     }
 }
 
+
+export const getFavorites = async (req, res) => {
+    try {
+        const params = req.body.params
+        let temp = [];
+        params.map((key) => {
+            temp.push({_id:(key)})
+        })
+        const posts = await PostModel.find({ $or: temp})
+        res.json(posts) 
+    } catch (error) {
+        res.json({message:error.message})
+    }
+}
