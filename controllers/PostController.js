@@ -151,13 +151,11 @@ export const getMasseuses = async (req, res) => {
 export const getMyPosts = async (req, res) => {
     try {
         const userId = req.params.id
-        console.log(userId)
         const myPosts = await PostModel.find({user:userId})
-        // console.log(myPosts)
         res.json(myPosts)
     } catch (err) {
         res.json({message:err.message})
-    }
+    } 
 }
 
 
