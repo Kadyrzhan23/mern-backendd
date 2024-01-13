@@ -193,7 +193,6 @@ export const postTurnOnStatus = async (req, res) => {
 
 export const postDisableStatus = async (req, res) => {
     try {
-        console.log('start')
         const postId = req.params.id
         const post = await PostModel.findById(postId)
         await PostModel.updateOne({_id:postId},{
@@ -204,8 +203,10 @@ export const postDisableStatus = async (req, res) => {
             }
         });
         const res = await PostModel.findById(postId)
-        res.json(res)
+        res.json({res})
     } catch (error) {
-        
+        console.log(
+            error.message
+        )
     }
 }
