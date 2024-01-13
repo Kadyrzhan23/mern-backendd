@@ -184,7 +184,8 @@ export const postTurnOnStatus = async (req, res) => {
                 tarif:post.postStatus.tarif
             }
         });
-        res.json({success: true})
+        const res = await PostModel.findById(postId)
+        res.json(res)
     } catch (error) {
         
     }
@@ -202,7 +203,8 @@ export const postDisableStatus = async (req, res) => {
                 tarif:post.postStatus.tarif
             }
         });
-        res.json({success: true})
+        const res = await PostModel.findById(postId)
+        res.json(res)
     } catch (error) {
         
     }
