@@ -185,7 +185,7 @@ export const postTurnOnStatus = async (req, res) => {
             }
         });
         const res = await PostModel.findById(postId)
-        res.json(res)
+        res.json({res})
     } catch (error) {
         
     }
