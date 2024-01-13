@@ -184,15 +184,16 @@ export const postTurnOnStatus = async (req, res) => {
                 tarif:post.postStatus.tarif
             }
         });
-        const res = await PostModel.findById(postId)
-        res.json(res)
+        const response = await PostModel.findById(postId)
+        res.json(response)
     } catch (error) {
-        
+        console.log(error.message)
     }
 }
 
 export const postDisableStatus = async (req, res) => {
     try {
+        console.log('start')
         const postId = req.params.id
         const post = await PostModel.findById(postId)
         await PostModel.updateOne({_id:postId},{
@@ -202,8 +203,8 @@ export const postDisableStatus = async (req, res) => {
                 tarif:post.postStatus.tarif
             }
         });
-        const res = await PostModel.findById(postId)
-        res.json(res)
+        const response = await PostModel.findById(postId)
+        res.json(response)
     } catch (error) {
         console.log(
             error.message
