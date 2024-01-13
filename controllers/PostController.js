@@ -172,3 +172,38 @@ export const getFavorites = async (req, res) => {
         res.json({message:error.message})
     }
 }
+
+export const postTurnOnStatus = async (req, res) => {
+    try {
+        const postId = req.params.id
+        const post = await PostModel.findById(postId)
+        await PostModel.updateOne({_id:postId},{
+            postStatus:{
+                permissions: true,
+                status:post.postStatus.status,
+                tarif:post.postStatus.tarif
+            }
+        });
+        res.json({success: true})
+    } catch (error) {
+        
+    }
+}
+
+export const postDisableStatus = async (req, res) => {
+    try {
+        console.log('start')
+        const postId = req.params.id
+        const post = await PostModel.findById(postId)
+        await PostModel.updateOne({_id:postId},{
+            postStatus:{
+                permissions: false,
+                status:post.postStatus.status,
+                tarif:post.postStatus.tarif
+            }
+        });
+        res.json({success: true})
+    } catch (error) {
+        
+    }
+}

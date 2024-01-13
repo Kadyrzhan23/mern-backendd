@@ -84,13 +84,10 @@ app.post(
   PostController.create
 );
 app.delete("/posts/:id", checkAuth, PostController.remove);
-app.patch(
-  "/posts/:id",
-  checkAuth,
-  postCreateValidation,
-  handleValidateError,
-  PostController.update
-);
+app.patch("/posts/:id",checkAuth,postCreateValidation,handleValidateError,PostController.update);
+app.patch("/posts/disable/:id",PostController.postDisableStatus);
+app.patch("/posts/turnon/:id",PostController.postTurnOnStatus);
+
 
 //Загрузка картинок
 
