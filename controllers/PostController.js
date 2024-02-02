@@ -1,4 +1,6 @@
 import { ObjectId } from "mongodb"
+import fs from 'fs'
+import { unlinkSync } from 'node:fs';
 import PostModel from "../models/Post.js"
 
 
@@ -193,7 +195,6 @@ export const postTurnOnStatus = async (req, res) => {
 
 export const postDisableStatus = async (req, res) => {
     try {
-        console.log('start')
         const postId = req.params.id
         const post = await PostModel.findById(postId)
         await PostModel.updateOne({_id:postId},{
@@ -209,5 +210,41 @@ export const postDisableStatus = async (req, res) => {
         console.log(
             error.message
         )
+    }
+}
+
+export const removePhoto = async (req, res) => {
+    try {
+        const id = req.params.id
+        const index = req.params.index
+        const post = await PostModel.findById(id)
+        const path = post.images[index]
+        fs.unlink(path,(err)=> {
+            if(err){
+                console.log(err)
+            }
+        })
+        res.json({success: true})
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+
+export const selectedToMain = async (req, res)=> {
+    try {
+        const id = req.params.id
+        const index = req.params.index
+        const post = await PostModel.findById(id)
+        let images = post.images
+        const current = images[index]
+        images.splice(index, 1)
+        images.unshift(current)
+        await PostModel.updateOne({_id:id},{
+            images:images
+        });
+        res.json({success: true})
+    } catch (error) {
+        res.status(400).json({ error: error.message })
     }
 }
